@@ -21,20 +21,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/quotes")
 @Builder
-@SuperBuilder
+
 public class QuotesController {
     @Autowired
     private final QuoteService quoteService;
     private final ResponseData responseData;
-    Long limit;
+
     @PostMapping("/new")
-    public ResponseEntity<ResponseData> NewQuote(@RequestBody Integer limit){
+    public ResponseEntity<ResponseData> newQuote(@RequestBody Integer limit){
 
 
         try {
             // Assuming your QuoteService.NewQuote method takes a limit parameter
             // and returns a List<Data> for responseData.data
-            List<Data> quoteData = quoteService.NewQuote(limit);
+            List<Data> quoteData = quoteService.newQuote(limit);
 
             // Populate the responseData object
             ResponseData responseData = ResponseData.builder()

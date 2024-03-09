@@ -16,7 +16,7 @@ public class QuoteServiceImpl implements QuoteService {
     private final QuoteRepository quoteRepository;
 
     @Override
-    public List<Data> NewQuote(Integer limit) {
+    public List<Data> newQuote(Integer limit) {
         List<QuotesVo> quotesVo =QuotesMapper.toQuotesVoList(quoteRepository.findAll());
         List<Data> data=RandomQuoteSelector.selectRandomQuotes(quotesVo,limit);
     return data;

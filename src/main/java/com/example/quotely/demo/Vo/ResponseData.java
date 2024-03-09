@@ -3,10 +3,11 @@ package com.example.quotely.demo.Vo;
 import com.example.quotely.demo.Vo.Data;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Builder
-@SuperBuilder
+@Component
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

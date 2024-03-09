@@ -7,8 +7,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-@Builder
-@SuperBuilder
+
 public class RandomQuoteSelector {
 
     public static List<Data> selectRandomQuotes(List<QuotesVo> quotes, int numberOfQuotesToSelect) {
