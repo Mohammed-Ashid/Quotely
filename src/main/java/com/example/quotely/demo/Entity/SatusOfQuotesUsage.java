@@ -1,13 +1,11 @@
 package com.example.quotely.demo.Entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-@Table(name="Quotes")
+@Table(name="StatusOfQuotesUsage")
 @Entity
 @Data
 @AllArgsConstructor
@@ -16,11 +14,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 @NoArgsConstructor
 
-public class Quotes {
+public class SatusOfQuotesUsage {
     @Id
-    @Generated
+    private Long statusId;
+    private Long userId;
     private Long quotesId;
-    private String category;
-    private  String content;
-
 }

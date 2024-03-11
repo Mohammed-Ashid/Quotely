@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 @Table
 @Entity
@@ -15,11 +14,9 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 
-public class QuotesVo {
+public class UserVo {
     @Id
-    @Generated
-    private Long quotesId;
-    private String category;
-    private  String content;
-
+    private Long userId;
+    private String firstName;
+    private String Lastname;
 }

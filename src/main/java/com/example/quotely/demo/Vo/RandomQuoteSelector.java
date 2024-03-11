@@ -18,20 +18,24 @@ public class RandomQuoteSelector {
 
         // Ensure we don't try to select more quotes than available
         int numberOfQuotes = Math.min(numberOfQuotesToSelect, totalQuotes);
+        if (numberOfQuotes < numberOfQuotesToSelect) {
+            return null;
+        } else {
 
-        for (int i = 0; i < numberOfQuotes; i++) {
-            int randomIndex = random.nextInt(totalQuotes);
-            QuotesVo randomQuote = quotes.get(randomIndex);
+            for (int i = 0; i < numberOfQuotes; i++) {
+                int randomIndex = random.nextInt(totalQuotes);
+                QuotesVo randomQuote = quotes.get(randomIndex);
 
-            Data data = new Data();
-            data.setId(randomQuote.getId());
-            data.setCategory(randomQuote.getCategory()); // Assuming Quotes has getCategory method
-            data.setDataList(List.of(randomQuote.getContent())); // Assuming Quotes has getContent method
+                Data data = new Data();
+                data.setId(randomQuote.getQuotesId());
+                data.setCategory(randomQuote.getCategory()); // Assuming Quotes has getCategory method
+                data.setDataList(List.of(randomQuote.getContent())); // Assuming Quotes has getContent method
 
-            selectedQuotes.add(data);
+                selectedQuotes.add(data);
+            }
+
+            return selectedQuotes;
         }
-
-        return selectedQuotes;
     }
 
 }

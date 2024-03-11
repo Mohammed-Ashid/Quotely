@@ -2,19 +2,21 @@ databaseChangeLog:
   - changeSet:
       id: 1
       author: Ashid
+
+      # Creating the StatusOfQuotesUsage table
       changes:
         - createTable:
-            tableName: quotes
+            tableName: status_of_quotes_usage
             columns:
               - column:
-                  name: quotes_id
-                  type: BIGINT
+                  name: status_id
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
-                  name: category
-                  type: VARCHAR(255)
+                  name: user_id
+                  type: bigint
               - column:
-                  name: content
-                  type: VARCHAR(255)
+                  name: quotes_id
+                  type: bigint

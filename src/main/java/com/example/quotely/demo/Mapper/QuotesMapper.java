@@ -15,9 +15,17 @@ public class QuotesMapper {
 
     private static QuotesVo toQuotesVo(Quotes quotes) {
   return QuotesVo.builder()
-          .id(quotes.getId())
+          .quotesId(quotes.getQuotesId())
           .category(quotes.getCategory())
           .content(quotes.getContent())
           .build();
+    }
+
+    public static Quotes toQuotes(QuotesVo quotesVo) {
+        return Quotes.builder()
+                .quotesId(quotesVo.getQuotesId())
+                .category(quotesVo.getCategory())
+                .content(quotesVo.getContent())
+                .build();
     }
 }

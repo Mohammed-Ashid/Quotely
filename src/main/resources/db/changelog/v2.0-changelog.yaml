@@ -4,17 +4,17 @@ databaseChangeLog:
       author: Ashid
       changes:
         - createTable:
-            tableName: quotes
+            tableName: user
             columns:
               - column:
-                  name: quotes_id
+                  name: user_id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
-                  name: category
+                  name: first_name
                   type: VARCHAR(255)
               - column:
-                  name: content
+                  name: last_name
                   type: VARCHAR(255)

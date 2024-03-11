@@ -2,6 +2,7 @@ package com.example.quotely.demo.Controller;
 
 import com.example.quotely.demo.Service.QuoteService;
 import com.example.quotely.demo.Vo.Data;
+import com.example.quotely.demo.Vo.QuotesVo;
 import com.example.quotely.demo.Vo.ResponseData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,25 +28,22 @@ public class QuotesController {
     private final QuoteService quoteService;
     private final ResponseData responseData;
 
-    @PostMapping("/new")
+    @PostMapping("/addnew")
+    public ResponseEntity<ResponseData> addQuote(@RequestBody QuotesVo quotesVo){
+        ResponseData result=quoteService.addQuote(quotesVo);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/newset")
     public ResponseEntity<ResponseData> newQuote(@RequestBody Integer limit){
 
 
         try {
-            // Assuming your QuoteService.NewQuote method takes a limit parameter
-            // and returns a List<Data> for responseData.data
-            List<Data> quoteData = quoteService.newQuote(limit);
+          ResponseData result=quoteService.newQuote(limit);
 
-            // Populate the responseData object
-            ResponseData responseData = ResponseData.builder()
-                    .code("Success")
-                    .status("OK")
-                    .message("New quotes generated successfully")
-                    .data(quoteData)
-                    .build();
 
             // Return ResponseEntity with your responseData
-            return ResponseEntity.ok(responseData);
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             // Handle exceptions here
 
