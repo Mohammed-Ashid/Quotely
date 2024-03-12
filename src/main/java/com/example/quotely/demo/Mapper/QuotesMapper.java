@@ -23,7 +23,6 @@ public class QuotesMapper {
 
     public static Quotes toQuotes(QuotesVo quotesVo) {
         return Quotes.builder()
-                .quotesId(quotesVo.getQuotesId())
                 .category(quotesVo.getCategory())
                 .content(quotesVo.getContent())
                 .build();

@@ -1,8 +1,6 @@
 package com.example.quotely.demo.Vo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
@@ -17,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 
 public class QuotesVo {
     @Id
-    @Generated
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long quotesId;
     private String category;
     private  String content;

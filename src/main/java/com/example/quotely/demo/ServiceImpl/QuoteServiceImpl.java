@@ -11,23 +11,31 @@ import lombok.RequiredArgsConstructor;
 import com.example.quotely.demo.Mapper.QuotesMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class QuoteServiceImpl implements QuoteService {
     private final QuoteRepository quoteRepository;
 
     @Override
-    public ResponseData newQuote(Integer limit) {
+    public ResponseData newQuote(Integer limit, Long userId) {
         List<QuotesVo> quotesVo =QuotesMapper.toQuotesVoList(quoteRepository.findAll());
-        List<Data> data=RandomQuoteSelector.selectRandomQuotes(quotesVo,limit);
+        Optional<List<Data>> data=RandomQuoteSelector.selectRandomQuotes(quotesVo,limit,userId);
         ResponseData responseData=new ResponseData();
         if(data==null||limit<=0){
+            Data dataResult = Data.builder()
+                    .id(0)
+                    .category("user")
+                    .dataList("invalid ")
+                    .build();
            responseData= ResponseData.builder()
                     .code("Bad_Request")
                     .status("Bad_Request")
                     .message("Invalid Usage")
-                    .data(null)
+                    .data(Optional.ofNullable(Collections.singletonList(dataResult)))
                     .build();
 
         }

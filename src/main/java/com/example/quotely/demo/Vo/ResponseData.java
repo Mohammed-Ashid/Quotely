@@ -1,11 +1,11 @@
 package com.example.quotely.demo.Vo;
 
-import com.example.quotely.demo.Vo.Data;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+
 @Builder
 @Component
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class ResponseData {
     public String code;
     public String status;
     public String message;
-    public List<Data> data;
+    public Optional<List<Data>> data;
 }
 
 

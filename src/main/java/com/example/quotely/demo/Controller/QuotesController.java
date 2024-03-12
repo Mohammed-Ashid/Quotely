@@ -35,11 +35,11 @@ public class QuotesController {
     }
 
     @PostMapping("/newset")
-    public ResponseEntity<ResponseData> newQuote(@RequestBody Integer limit){
+    public ResponseEntity<ResponseData> newQuote(@RequestBody Integer limit,@RequestBody Long userId){
 
 
         try {
-          ResponseData result=quoteService.newQuote(limit);
+          ResponseData result=quoteService.newQuote(limit,userId);
 
 
             // Return ResponseEntity with your responseData

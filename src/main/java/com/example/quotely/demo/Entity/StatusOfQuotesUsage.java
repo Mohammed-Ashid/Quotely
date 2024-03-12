@@ -1,8 +1,6 @@
 package com.example.quotely.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Table(name="StatusOfQuotesUsage")
@@ -14,8 +12,9 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 
-public class SatusOfQuotesUsage {
+public class StatusOfQuotesUsage {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long statusId;
     private Long userId;
     private Long quotesId;

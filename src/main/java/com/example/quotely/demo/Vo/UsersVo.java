@@ -1,8 +1,6 @@
 package com.example.quotely.demo.Vo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.Data;
 
@@ -14,8 +12,9 @@ import lombok.Data;
 @Getter
 @Setter
 
-public class UserVo {
+public class UsersVo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String firstName;
     private String Lastname;

@@ -2,22 +2,19 @@ package com.example.quotely.demo.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-@Table(name="Quotes")
+@Table(name="Users")
 @Entity
 @Data
 @AllArgsConstructor
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
 
-public class Quotes {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long quotesId;
-    private String category;
-    private  String content;
-
+    private Long userId;
+    private String firstName;
+    private String LastName;
 }

@@ -1,17 +1,14 @@
 package com.example.quotely.demo.Vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Builder
+@Component
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@Component
 public class Data {
     private long id;
     private String category;
