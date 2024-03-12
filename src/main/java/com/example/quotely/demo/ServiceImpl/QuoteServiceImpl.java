@@ -19,11 +19,12 @@ import java.util.Optional;
 @Service
 public class QuoteServiceImpl implements QuoteService {
     private final QuoteRepository quoteRepository;
+    private final RandomQuoteSelector randomQuoteSelector;
 
     @Override
-    public ResponseData newQuote(Integer limit, Long userId) {
+    public ResponseData newQuote(Long limit, Long userId) {
         List<QuotesVo> quotesVo =QuotesMapper.toQuotesVoList(quoteRepository.findAll());
-        Optional<List<Data>> data=RandomQuoteSelector.selectRandomQuotes(quotesVo,limit,userId);
+        Optional<List<Data>> data=randomQuoteSelector.selectRandomQuotes(quotesVo, limit,userId);
         ResponseData responseData=new ResponseData();
         if(data==null||limit<=0){
             Data dataResult = Data.builder()

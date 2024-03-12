@@ -1,11 +1,13 @@
 package com.example.quotely.demo.Controller;
 
+import com.example.quotely.demo.DataTransferObject.NewQuoteRequest;
 import com.example.quotely.demo.Service.QuoteService;
 import com.example.quotely.demo.Vo.Data;
 import com.example.quotely.demo.Vo.QuotesVo;
 import com.example.quotely.demo.Vo.ResponseData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Limit;
@@ -23,6 +25,7 @@ import java.util.List;
 @RequestMapping("/quotes")
 @Builder
 
+
 public class QuotesController {
     @Autowired
     private final QuoteService quoteService;
@@ -35,11 +38,11 @@ public class QuotesController {
     }
 
     @PostMapping("/newset")
-    public ResponseEntity<ResponseData> newQuote(@RequestBody Integer limit,@RequestBody Long userId){
+    public ResponseEntity<ResponseData> newQuote(@RequestBody NewQuoteRequest request){
 
 
         try {
-          ResponseData result=quoteService.newQuote(limit,userId);
+          ResponseData result=quoteService.newQuote(request.getLimit(), request.getUserId());
 
 
             // Return ResponseEntity with your responseData

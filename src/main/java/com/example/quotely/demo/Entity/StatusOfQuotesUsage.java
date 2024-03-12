@@ -6,11 +6,13 @@ import lombok.*;
 @Table(name="StatusOfQuotesUsage")
 @Entity
 @Data
-@AllArgsConstructor
+
 @Builder
+
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class StatusOfQuotesUsage {
     @Id

@@ -1,5 +1,5 @@
 package com.example.quotely.demo.Vo;
-
+import com.example.quotely.demo.Entity.StatusOfQuotesUsage;
 import com.example.quotely.demo.Repository.StatusOfQuotesUsageRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -7,28 +7,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-@RequiredArgsConstructor
 @Component
 @EnableJpaRepositories(basePackages = "com.example.quotely.demo.Repository")
 @EntityScan(basePackages = "com.example.quotely.demo.Entity")
+@Service
 
 
 public class RandomQuoteSelector {
-    @Autowired
-    public static StatusOfQuotesUsageRepository statusOfQuoteUsageRepository;
+    private final StatusOfQuotesUsageRepository statusOfQuoteUsageRepository;
 
-    @Transactional
-    public static Optional<Long> getUserIdByQuotesId(Long QuotesId)
-    {
-        return statusOfQuoteUsageRepository.findUserIdByQuotesId(QuotesId);
+    @Autowired
+    public RandomQuoteSelector(StatusOfQuotesUsageRepository statusOfQuoteUsageRepository) {
+        this.statusOfQuoteUsageRepository = statusOfQuoteUsageRepository;
     }
 
-    public static Optional<List<Data>> selectRandomQuotes(List<QuotesVo> quotes, int numberOfQuotesToSelect, Long userId)
+    @Transactional
+    public boolean doesUserQuoteExist(Long userId, Long quotesId) {
+//        if (statusOfQuoteUsageRepository == null) {
+//            return false;
+//        }
+//        else {
+            Optional<Long> userIdOptional = statusOfQuoteUsageRepository.findUserIdByQuotesId(quotesId);
+
+            // Check if the userIdOptional is present and matches the provided userId
+            return userIdOptional.isPresent() && userIdOptional.get().equals(userId);
+//        }
+    }
+
+
+
+    public Optional<List<Data>> selectRandomQuotes(List<QuotesVo> quotes, Long numberOfQuotesToSelect, Long suserId)
     {
         if (quotes == null || quotes.isEmpty() || numberOfQuotesToSelect <= 0)
         {
@@ -40,7 +54,7 @@ public class RandomQuoteSelector {
         int totalQuotes = quotes.size();
 
         // Ensure we don't try to select more quotes than available
-        int numberOfQuotes = Math.min(numberOfQuotesToSelect, totalQuotes);
+        long numberOfQuotes = Math.min(numberOfQuotesToSelect, totalQuotes);
         if (totalQuotes < numberOfQuotesToSelect)
         {
             return Optional.empty();
@@ -54,16 +68,17 @@ public class RandomQuoteSelector {
                 QuotesVo randomQuote = quotes.get(randomIndex);
 
                 // Fetching quotesId from the randomQuote
-                Long quotesId = randomQuote.getQuotesId();
+                Long squotesId = randomQuote.getQuotesId();
 
-                // Fetching userIds who have used the quote
-                Optional<Long> usrId=getUserIdByQuotesId(quotesId);
+
+
+                boolean userQuoteExists = doesUserQuoteExist(suserId, squotesId);
 
                 // Check if the current userId exists in the list
-                boolean userIdExists = usrId.map(id -> id.equals(userId)).orElse(false);
+
 
                 // If userId exists, skip this quote and continue to the next iteration
-                if (userIdExists) {
+                if (userQuoteExists) {
                     i--;
                     continue;
                 }
@@ -72,7 +87,11 @@ public class RandomQuoteSelector {
 
 
 
-                statusOfQuoteUsageRepository.saveUserIdAndQuotesId(userId, quotesId);
+                StatusOfQuotesUsage statusOfQuotesUsage=StatusOfQuotesUsage.builder()
+                        .quotesId(squotesId)
+                        .userId(suserId)
+                        .build();
+                statusOfQuoteUsageRepository.save(statusOfQuotesUsage);
 
                 Data data = new Data();
                 data.setId(randomQuote.getQuotesId());
