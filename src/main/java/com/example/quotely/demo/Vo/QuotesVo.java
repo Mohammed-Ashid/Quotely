@@ -3,7 +3,7 @@ package com.example.quotely.demo.Vo;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
+
 
 @Table
 @Entity

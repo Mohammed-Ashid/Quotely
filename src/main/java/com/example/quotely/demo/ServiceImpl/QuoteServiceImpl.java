@@ -12,7 +12,7 @@ import com.example.quotely.demo.Vo.ResponseData;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import com.example.quotely.demo.Mapper.QuotesMapper;
-import org.apache.tomcat.util.bcel.Const;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -47,7 +47,7 @@ public class QuoteServiceImpl implements QuoteService {
         }else {
             List<QuotesVo> quotesVo = QuotesMapper.toQuotesVoList(quoteRepository.findAll());
             Optional<List<Data>> data = randomQuoteSelector.selectRandomQuotes(quotesVo, limit, userId);
-//        boolean datapresent= data.isPresent();
+
 
 
             if (data == null || limit <= 0 || data.isEmpty()) {
