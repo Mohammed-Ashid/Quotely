@@ -16,5 +16,8 @@ public interface StatusOfQuotesUsageRepository extends JpaRepository<StatusOfQuo
     @Query("SELECT s.userId FROM StatusOfQuotesUsage s WHERE s.quotesId = :quotesId")
     Optional<List<Long>> findUserIdByQuotesId(@Param("quotesId") Long quotesId);
 
+    @Query("SELECT s.quotesId FROM StatusOfQuotesUsage s WHERE s.userId = :userId")
+    Optional<List<Long>> findUserUsedQuotes(@Param("userId") Long userId);
+
 
 }

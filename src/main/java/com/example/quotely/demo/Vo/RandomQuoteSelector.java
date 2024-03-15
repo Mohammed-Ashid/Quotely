@@ -36,7 +36,13 @@ public class RandomQuoteSelector {
         boolean isUserIdPresent = userIdOptional.map(userIdList -> userIdList.contains(suserId)).orElse(false);
         return isUserIdPresent;
     }
+    public Long userUsedQuotesSizeFinder(Long suserId){
+        Optional<List<Long>> quotesIdOptional=statusOfQuoteUsageRepository.findUserUsedQuotes(suserId);
+        Long size = Long.valueOf(quotesIdOptional.map(List::size).orElse(0));
 
+        return size;
+
+    }
 
 
     public Optional<List<Data>> selectRandomQuotes(List<QuotesVo> quotes, Long numberOfQuotesToSelect, Long suserId)
@@ -45,19 +51,19 @@ public class RandomQuoteSelector {
         {
             return Optional.empty(); // Return an empty Optional if the input is invalid
         }
+        Long userUsedQuotesSize=userUsedQuotesSizeFinder(suserId);
 
         List<Data> selectedQuotes = new ArrayList<>();
         Random random = new Random();
         int totalQuotes = quotes.size();
+        int balanceQuotesSize= (int) (totalQuotes-userUsedQuotesSize);
+        if(balanceQuotesSize==0){
+            return null;
+        }
 
         // Ensure we don't try to select more quotes than available
         long numberOfQuotes = Math.min(numberOfQuotesToSelect, totalQuotes);
-        if (totalQuotes < numberOfQuotesToSelect)
-        {
-            return Optional.empty();
-        }
-        else
-        {
+
             Integer iterationCount=0;
             for (int i = 0; i < numberOfQuotes; i++)
             {
@@ -71,15 +77,12 @@ public class RandomQuoteSelector {
                 // Check if the current userId exists in the list
                 boolean userQuoteExists = doesUserQuoteExist(suserId, squotesId);
 
-                iterationCount++;
-                if(iterationCount==totalQuotes){
-                    if(selectedQuotes.size()>0) {
+
+                    if(selectedQuotes.size()==balanceQuotesSize) {
                         return Optional.ofNullable(selectedQuotes);
                     }
-                    else {
-                        return null;
-                    }
-                }
+
+
 
 
 
@@ -116,7 +119,7 @@ public class RandomQuoteSelector {
             } else {
                 return Optional.of(selectedQuotes);
             }
-        }
+
     }
 }
 
