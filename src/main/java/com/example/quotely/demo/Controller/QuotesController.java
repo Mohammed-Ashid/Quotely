@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -49,12 +51,17 @@ public class QuotesController {
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             // Handle exceptions here
+            Data dataResult = Data.builder()
+                    .id(0)
+                    .category("quotes/newset")
+                    .dataList("Error")
+                    .build();
 
             ResponseData errorResponse = ResponseData.builder()
                     .code("Bad_Request")
                     .status("Bad_Request")
                     .message("Invalid usage")
-                    .data(null) // Assuming data field expects a String in case of an error
+                    .data(Optional.ofNullable(Collections.singletonList(dataResult))) // Assuming data field expects a String in case of an error
                     .build();
 
             return ResponseEntity.badRequest().body(errorResponse);
