@@ -7,7 +7,7 @@ public class UserMapper {
     public static Users toUser(UsersVo userVo){
         return Users.builder()
                 .firstName(userVo.getFirstName())
-                .lastName(userVo.getLastname())
+                .lastName(userVo.getLastName())
                 .build();
     }
 }

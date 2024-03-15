@@ -7,8 +7,10 @@ import com.example.quotely.demo.Vo.Data;
 import com.example.quotely.demo.Vo.QuotesVo;
 import com.example.quotely.demo.Vo.RandomQuoteSelector;
 import com.example.quotely.demo.Vo.ResponseData;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import com.example.quotely.demo.Mapper.QuotesMapper;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -22,11 +24,13 @@ public class QuoteServiceImpl implements QuoteService {
     private final RandomQuoteSelector randomQuoteSelector;
 
     @Override
+    @Transactional
     public ResponseData newQuote(Long limit, Long userId) {
         List<QuotesVo> quotesVo =QuotesMapper.toQuotesVoList(quoteRepository.findAll());
         Optional<List<Data>> data=randomQuoteSelector.selectRandomQuotes(quotesVo, limit,userId);
+//        boolean datapresent= data.isPresent();
         ResponseData responseData=new ResponseData();
-        if(data==null||limit<=0){
+        if(data==null||limit<=0|| data.isEmpty()){
             Data dataResult = Data.builder()
                     .id(0)
                     .category("user")

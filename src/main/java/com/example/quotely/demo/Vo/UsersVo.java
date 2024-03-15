@@ -17,5 +17,5 @@ public class UsersVo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String firstName;
-    private String lastname;
+    private String lastName;
 }

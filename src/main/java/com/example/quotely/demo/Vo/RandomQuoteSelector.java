@@ -19,6 +19,7 @@ import java.util.Random;
 @Service
 
 
+
 public class RandomQuoteSelector {
     private final StatusOfQuotesUsageRepository statusOfQuoteUsageRepository;
 
@@ -27,17 +28,14 @@ public class RandomQuoteSelector {
         this.statusOfQuoteUsageRepository = statusOfQuoteUsageRepository;
     }
 
-    @Transactional
-    public boolean doesUserQuoteExist(Long userId, Long quotesId) {
-//        if (statusOfQuoteUsageRepository == null) {
-//            return false;
-//        }
-//        else {
-            Optional<Long> userIdOptional = statusOfQuoteUsageRepository.findUserIdByQuotesId(quotesId);
-
+    public boolean doesUserQuoteExist(Long suserId, Long quotesId) {
+//
+        Optional<List<Long>> userIdOptional = statusOfQuoteUsageRepository.findUserIdByQuotesId(quotesId);
             // Check if the userIdOptional is present and matches the provided userId
-            return userIdOptional.isPresent() && userIdOptional.get().equals(userId);
-//        }
+//            return userIdOptional.isPresent() && userIdOptional.get().equals(suserId);
+//
+        boolean isUserIdPresent = userIdOptional.map(userIdList -> userIdList.contains(suserId)).orElse(false);
+        return isUserIdPresent;
     }
 
 
@@ -61,7 +59,7 @@ public class RandomQuoteSelector {
         }
         else
         {
-
+            Integer iterationCount=0;
             for (int i = 0; i < numberOfQuotes; i++)
             {
                 int randomIndex = random.nextInt(totalQuotes);
@@ -71,10 +69,19 @@ public class RandomQuoteSelector {
                 Long squotesId = randomQuote.getQuotesId();
 
 
-
+                // Check if the current userId exists in the list
                 boolean userQuoteExists = doesUserQuoteExist(suserId, squotesId);
 
-                // Check if the current userId exists in the list
+                iterationCount++;
+                if(iterationCount==totalQuotes){
+                    if(selectedQuotes.size()>0) {
+                        return Optional.ofNullable(selectedQuotes);
+                    }
+                    else {
+                        return null;
+                    }
+                }
+
 
 
                 // If userId exists, skip this quote and continue to the next iteration
