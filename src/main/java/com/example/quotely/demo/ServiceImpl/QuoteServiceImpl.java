@@ -82,7 +82,6 @@ public class QuoteServiceImpl implements QuoteService {
         Quotes quotes=QuotesMapper.toQuotes(quotesVo);
         quoteRepository.save(quotes);
         Data dataResult = Data.builder()
-                .id(quotesVo.getQuotesId())
                 .category(quotesVo.getCategory())
                 .dataList("New quote added")
                 .build();
