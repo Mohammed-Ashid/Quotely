@@ -4,10 +4,10 @@ databaseChangeLog:
       author: Ashid
       changes:
         - createTable:
-            tableName: status_of_quotes_usage
+            tableName: favourites
             columns:
               - column:
-                  name: status_id
+                  name: favourites_id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -20,4 +20,4 @@ databaseChangeLog:
                   type: bigint
               - column:
                   name: status
-                  type: varchar(50)
+                  type: varchar(10)

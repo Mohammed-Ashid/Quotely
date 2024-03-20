@@ -1,5 +1,6 @@
 package com.example.quotely.demo.Entity;
 
+import com.example.quotely.demo.Enums.GeneralStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class StatusOfQuotesUsage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long statusId;
-    private Long userId;
+    private Long usersId;
     private Long quotesId;
+    private GeneralStatus status;
 }

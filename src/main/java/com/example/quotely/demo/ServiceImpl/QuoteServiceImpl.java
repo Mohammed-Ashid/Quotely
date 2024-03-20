@@ -5,10 +5,10 @@ import com.example.quotely.demo.Entity.Users;
 import com.example.quotely.demo.Repository.QuoteRepository;
 import com.example.quotely.demo.Repository.UserRepository;
 import com.example.quotely.demo.Service.QuoteService;
-import com.example.quotely.demo.Vo.Data;
+import com.example.quotely.demo.Responses.QuotesData;
 import com.example.quotely.demo.Vo.QuotesVo;
 import com.example.quotely.demo.Vo.RandomQuoteSelector;
-import com.example.quotely.demo.Vo.ResponseData;
+import com.example.quotely.demo.Responses.QuotesResponseData;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import com.example.quotely.demo.Mapper.QuotesMapper;
@@ -28,16 +28,16 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     @Transactional
-    public ResponseData newQuote(Long limit, Long userId) {
-        ResponseData responseData = new ResponseData();
+    public QuotesResponseData newQuote(Long limit, Long userId) {
+        QuotesResponseData responseData = new QuotesResponseData();
         Optional<Users> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) {
-            Data dataResult = Data.builder()
+            QuotesData dataResult = QuotesData.builder()
                     .id(0)
                     .category("user")
                     .dataList("No user exist ")
                     .build();
-            responseData = ResponseData.builder()
+            responseData = QuotesResponseData.builder()
                     .code("Bad_Request")
                     .status("Bad_Request")
                     .message("Invalid Usage")
@@ -46,17 +46,17 @@ public class QuoteServiceImpl implements QuoteService {
             return responseData;
         }else {
             List<QuotesVo> quotesVo = QuotesMapper.toQuotesVoList(quoteRepository.findAll());
-            Optional<List<Data>> data = randomQuoteSelector.selectRandomQuotes(quotesVo, limit, userId);
+            Optional<List<QuotesData>> data = randomQuoteSelector.selectRandomQuotes(quotesVo, limit, userId);
 
 
 
             if (data == null || limit <= 0 || data.isEmpty()) {
-                Data dataResult = Data.builder()
+                QuotesData dataResult = QuotesData.builder()
                         .id(0)
                         .category("user")
                         .dataList("invalid ")
                         .build();
-                responseData = ResponseData.builder()
+                responseData = QuotesResponseData.builder()
                         .code("Bad_Request")
                         .status("Bad_Request")
                         .message("Invalid Usage")
@@ -65,7 +65,7 @@ public class QuoteServiceImpl implements QuoteService {
 
 
             } else {
-                responseData = ResponseData.builder()
+                responseData = QuotesResponseData.builder()
                         .code("Success")
                         .status("OK")
                         .message("New quotes generated successfully")
@@ -78,20 +78,30 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     @Override
-    public ResponseData addQuote(QuotesVo quotesVo) {
+    public QuotesResponseData addQuote(QuotesVo quotesVo) {
         Quotes quotes=QuotesMapper.toQuotes(quotesVo);
         quoteRepository.save(quotes);
-        Data dataResult = Data.builder()
+        QuotesData dataResult = QuotesData.builder()
                 .category(quotesVo.getCategory())
                 .dataList("New quote added")
                 .build();
 
-        ResponseData responseData= ResponseData.builder()
+        QuotesResponseData responseData= QuotesResponseData.builder()
                 .code("success")
                 .status("success")
                 .message("success")
                 .data(Optional.ofNullable(Collections.singletonList(dataResult)))
                 .build();
         return responseData;
+    }
+
+    @Override
+    public QuotesResponseData addToFavourites(Long userId, Long quotesId) {
+        return null;
+    }
+
+    @Override
+    public QuotesResponseData removeFromFavourites(Long userId, Long quotesId) {
+        return null;
     }
 }

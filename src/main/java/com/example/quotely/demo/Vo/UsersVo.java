@@ -13,9 +13,11 @@ import lombok.Data;
 @Setter
 
 public class UsersVo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+
+
     private String firstName;
     private String lastName;
+    private String email;
+    private String password;
+
 }

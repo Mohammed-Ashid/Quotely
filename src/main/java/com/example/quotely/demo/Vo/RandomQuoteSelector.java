@@ -2,6 +2,7 @@ package com.example.quotely.demo.Vo;
 import com.example.quotely.demo.Entity.StatusOfQuotesUsage;
 import com.example.quotely.demo.Repository.StatusOfQuotesUsageRepository;
 
+import com.example.quotely.demo.Responses.QuotesData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -45,7 +46,7 @@ public class RandomQuoteSelector {
     }
 
 
-    public Optional<List<Data>> selectRandomQuotes(List<QuotesVo> quotes, Long numberOfQuotesToSelect, Long suserId)
+    public Optional<List<QuotesData>> selectRandomQuotes(List<QuotesVo> quotes, Long numberOfQuotesToSelect, Long suserId)
     {
         if (quotes == null || quotes.isEmpty() || numberOfQuotesToSelect <= 0)
         {
@@ -53,7 +54,7 @@ public class RandomQuoteSelector {
         }
         Long userUsedQuotesSize=userUsedQuotesSizeFinder(suserId);
 
-        List<Data> selectedQuotes = new ArrayList<>();
+        List<QuotesData> selectedQuotes = new ArrayList<>();
         Random random = new Random();
         int totalQuotes = quotes.size();
         int balanceQuotesSize= (int) (totalQuotes-userUsedQuotesSize);
@@ -98,11 +99,11 @@ public class RandomQuoteSelector {
 
                 StatusOfQuotesUsage statusOfQuotesUsage=StatusOfQuotesUsage.builder()
                         .quotesId(squotesId)
-                        .userId(suserId)
+                        .usersId(suserId)
                         .build();
                 statusOfQuoteUsageRepository.save(statusOfQuotesUsage);
 
-                Data data = new Data();
+                QuotesData data = new QuotesData();
                 data.setId(randomQuote.getQuotesId());
                 data.setCategory(randomQuote.getCategory());
                 data.setDataList(List.of(randomQuote.getContent()));

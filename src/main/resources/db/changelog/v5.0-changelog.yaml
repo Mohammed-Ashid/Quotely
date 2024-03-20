@@ -4,20 +4,17 @@ databaseChangeLog:
       author: Ashid
       changes:
         - createTable:
-            tableName: status_of_quotes_usage
+            tableName: themes
             columns:
               - column:
-                  name: status_id
+                  name: themes_id
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
-                  name: users_id
-                  type: bigint
-              - column:
-                  name: quotes_id
-                  type: bigint
+                  name: themes_name
+                  type: varchar(255)
               - column:
                   name: status
                   type: varchar(50)

@@ -8,13 +8,28 @@ databaseChangeLog:
             columns:
               - column:
                   name: quotes_id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
-                  name: category
-                  type: VARCHAR(255)
-              - column:
                   name: content
-                  type: VARCHAR(255)
+                  type: varchar(255)
+              - column:
+                  name: quotes_author
+                  type: varchar(255)
+              - column:
+                  name: category
+                  type: varchar(50)
+              - column:
+                  name: created_at
+                  type: datetime
+              - column:
+                  name: updated_at
+                  type: datetime
+              - column:
+                  name: favourite_count
+                  type: bigint
+              - column:
+                  name: status
+                  type: varchar(10)

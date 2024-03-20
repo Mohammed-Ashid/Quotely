@@ -13,10 +13,10 @@ import java.util.Optional;
 @Repository
 
 public interface StatusOfQuotesUsageRepository extends JpaRepository<StatusOfQuotesUsage,Long> {
-    @Query("SELECT s.userId FROM StatusOfQuotesUsage s WHERE s.quotesId = :quotesId")
+    @Query("SELECT s.usersId FROM StatusOfQuotesUsage s WHERE s.quotesId = :quotesId")
     Optional<List<Long>> findUserIdByQuotesId(@Param("quotesId") Long quotesId);
 
-    @Query("SELECT s.quotesId FROM StatusOfQuotesUsage s WHERE s.userId = :userId")
+    @Query("SELECT s.quotesId FROM StatusOfQuotesUsage s WHERE s.usersId = :userId")
     Optional<List<Long>> findUserUsedQuotes(@Param("userId") Long userId);
 
 

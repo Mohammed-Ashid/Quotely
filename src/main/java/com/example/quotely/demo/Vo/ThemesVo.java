@@ -1,10 +1,8 @@
-package com.example.quotely.demo.Vo;
+package com.example.quotely.demo.Entity;
 
 import com.example.quotely.demo.Enums.GeneralStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.Data;
-
 
 @Table
 @Entity
@@ -13,14 +11,10 @@ import lombok.Data;
 @Builder
 @Getter
 @Setter
-
-public class QuotesVo {
-
+public class ThemesVo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long quotesId;
-    private  String content;
-    private  String quotesAuthor;
-    private String category;
+    private Long themesId;
+    private String themeName;
 
 }

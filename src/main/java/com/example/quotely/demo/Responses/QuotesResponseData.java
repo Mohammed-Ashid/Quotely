@@ -1,4 +1,4 @@
-package com.example.quotely.demo.Vo;
+package com.example.quotely.demo.Responses;
 
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -12,11 +12,11 @@ import java.util.Optional;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ResponseData {
+public class QuotesResponseData {
     public String code;
     public String status;
     public String message;
-    public Optional<List<Data>> data;
+    public Optional<List<QuotesData>> data;
 }
 
 
