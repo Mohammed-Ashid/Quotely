@@ -4,9 +4,7 @@ import com.example.quotely.demo.Enums.GeneralStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
-@Table(name="Favourites")
+@Table(name="UserCategories")
 @Entity
 @Data
 
@@ -16,12 +14,11 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Favourites {
+public class UserCategories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long favouritesId;
+    private Long categorySlno;
+    private Long categoriesId;
     private Long usersId;
-    private Long quotesId;
-    private Date createdAt;
     private GeneralStatus status;
 }

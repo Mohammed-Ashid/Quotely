@@ -6,22 +6,18 @@ import lombok.*;
 
 import java.util.Date;
 
-@Table(name="Favourites")
 @Entity
+@Table
 @Data
-
 @Builder
-
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Favourites {
+@NoArgsConstructor
+public class Categories {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long favouritesId;
-    private Long usersId;
-    private Long quotesId;
+
+    private long categoriesId;
+    private String categoriesName;
     private Date createdAt;
     private GeneralStatus status;
+
 }
