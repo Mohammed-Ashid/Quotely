@@ -4,30 +4,23 @@ databaseChangeLog:
       author: Ashid
       changes:
         - createTable:
-            tableName: status_of_quotes_usage
+            tableName: user_categories
             columns:
               - column:
-                  name: status_id
+                  name: category_slno
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
+                  name: categories_id
+                  type: bigint
+              - column:
                   name: users_id
                   type: bigint
               - column:
-                  name: quotes_id
-                  type: bigint
+                  name: auth_key
+                  type: varchar(255) # Adjust the length according to your needs
               - column:
                   name: status
-                  type: varchar(50)
-  - changeSet:
-      id: 2
-      author: Ashid
-      changes:
-        - addColumn:
-            tableName: status_of_quotes_usage
-            columns:
-              - column:
-                  name: auth_key
-                  type: varchar(255)
+                  type: varchar(10)

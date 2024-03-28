@@ -11,6 +11,7 @@ import com.example.quotely.demo.Responses.CategoryResponseData;
 import com.example.quotely.demo.Service.CategoriesService;
 import com.example.quotely.demo.Vo.CategoriesVo;
 import com.example.quotely.demo.Vo.UserCategoriesVo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,12 @@ public class CategoriesServiceImpl implements CategoriesService {
     private final UserCategoriesRepository userCategoriesRepository;
     private final CategoriesRepository categoriesRepository;
 
+    @Transactional
     @Override
     public CategoryResponseData addToCategory(UserCategoriesVo userCategoriesVo) {
 
         Long userId = userCategoriesVo.getUsersId();
+        String auth=userCategoriesVo.getAuthKey();
         Optional<List<Long>> categoriesIdOptional = userCategoriesVo.getCategoriesId();
         List<CategoriesData> savedCategories = new ArrayList<>();
 
@@ -40,6 +43,7 @@ public class CategoriesServiceImpl implements CategoriesService {
             for (Long categoryId : categoriesId) {
                 UserCategories category = new UserCategories();
                 category.setUsersId(userId);
+                category.setAuthKey(auth);
                 category.setCategoriesId(categoryId);
                 category.setStatus(GeneralStatus.ACTIVE);
                 userCategoriesRepository.save(category);
@@ -82,7 +86,7 @@ public class CategoriesServiceImpl implements CategoriesService {
                 .message("new category created")
                 .data(Optional.ofNullable(Collections.singletonList(categoriesData)))
                 .build();
-        return null;
+        return categoryResponseData;
     }
 }
 

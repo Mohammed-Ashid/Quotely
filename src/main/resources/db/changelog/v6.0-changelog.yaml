@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Ashid
+      changes:
+        - createTable:
+            tableName: categories
+            columns:
+              - column:
+                  name: categories_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: categories_name
+                  type: varchar(255) # Adjust the length according to your needs
+              - column:
+                  name: created_at
+                  type: datetime
+              - column:
+                  name: status
+                  type: varchar(10)

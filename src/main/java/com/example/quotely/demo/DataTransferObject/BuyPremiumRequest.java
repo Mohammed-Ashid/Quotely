@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 @Setter
-public class NewQuoteRequest {
-    private Long limit;
+public class BuyPremiumRequest {
     private Long userId;
+    private Long duration;
     private String authKey;
 }

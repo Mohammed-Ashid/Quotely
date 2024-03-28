@@ -20,5 +20,6 @@ public class UserCategories {
     private Long categorySlno;
     private Long categoriesId;
     private Long usersId;
+    private String authKey;
     private GeneralStatus status;
 }

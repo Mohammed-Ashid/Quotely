@@ -4,11 +4,11 @@ import com.example.quotely.demo.Vo.QuotesVo;
 import com.example.quotely.demo.Responses.QuotesResponseData;
 
 public interface QuoteService {
-    public QuotesResponseData newQuote(Long limit, Long userId);
+    public QuotesResponseData newQuote(Long limit, Long userId, String authKey);
 
    public QuotesResponseData addQuote(QuotesVo quotesVo);
 
-   public   QuotesResponseData addToFavourites(Long userId, Long quotesId);
-
-    QuotesResponseData removeFromFavourites(Long userId, Long quotesId);
+//   public   QuotesResponseData addToFavourites(Long userId, Long quotesId);
+//
+//    QuotesResponseData removeFromFavourites(Long userId, Long quotesId);
 }

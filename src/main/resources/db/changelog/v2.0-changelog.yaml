@@ -8,22 +8,22 @@ databaseChangeLog:
             columns:
               - column:
                   name: users_id
-                  type: bigint
+                  type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
                   name: first_name
-                  type: varchar(255)
+                  type: VARCHAR(255)
               - column:
                   name: last_name
-                  type: varchar(255)
+                  type: VARCHAR(255)
               - column:
                   name: email
-                  type: varchar(255)
+                  type: VARCHAR(255)
               - column:
                   name: password
-                  type: varchar(255)
+                  type: VARCHAR(255)
               - column:
                   name: created_at
                   type: datetime
@@ -32,22 +32,19 @@ databaseChangeLog:
                   type: datetime
               - column:
                   name: auth_key
-                  type: varchar(255)
+                  type: VARCHAR(255)
               - column:
                   name: themes_id
-                  type: bigint
+                  type: BIGINT
               - column:
                   name: premium_status
-                  type: varchar(10)
+                  type: VARCHAR(50)
               - column:
                   name: premium_start_date
-                  type: datetime
+                  type: DATE
               - column:
                   name: premium_end_date
-                  type: datetime
+                  type: DATE
               - column:
                   name: status
-                  type: varchar(10)
-
-
-
+                  type: VARCHAR(50)

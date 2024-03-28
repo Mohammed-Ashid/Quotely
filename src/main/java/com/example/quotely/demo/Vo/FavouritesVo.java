@@ -18,5 +18,6 @@ public class FavouritesVo {
 
     private Long usersId;
     private Long quotesId;
+    private String authKey;
 
 }

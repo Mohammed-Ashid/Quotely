@@ -21,5 +21,6 @@ public class StatusOfQuotesUsage {
     private Long statusId;
     private Long usersId;
     private Long quotesId;
+    private String authKey;
     private GeneralStatus status;
 }

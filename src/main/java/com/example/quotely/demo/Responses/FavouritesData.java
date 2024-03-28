@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 public class FavouritesData {
     public Long quotesId;
     public Long userId;
+    public  String authKey;
 }

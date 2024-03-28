@@ -5,6 +5,7 @@ import com.example.quotely.demo.Enums.PremiumStatus;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Builder
@@ -20,7 +21,9 @@ public class UserData {
     private Date createdAt;
     private Date lastUpdated;
     private  Long themeId;
+    private String authKey;
     private GeneralStatus status;
     private PremiumStatus premiumStatus;
+    private LocalDate premiumEndDate;
     private String response;
 }

@@ -23,5 +23,6 @@ public class Favourites {
     private Long usersId;
     private Long quotesId;
     private Date createdAt;
+    private String authKey;
     private GeneralStatus status;
 }

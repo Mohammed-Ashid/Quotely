@@ -22,5 +22,6 @@ public class QuotesVo {
     private  String content;
     private  String quotesAuthor;
     private String category;
+    private Long categoryId;
 
 }

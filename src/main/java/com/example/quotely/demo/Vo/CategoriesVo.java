@@ -20,5 +20,5 @@ public class CategoriesVo {
 
     private long categoriesId;
     private String categoriesName;
-    private Date createdAt;
+  
 }

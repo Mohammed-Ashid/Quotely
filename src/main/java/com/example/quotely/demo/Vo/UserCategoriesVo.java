@@ -18,11 +18,10 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserCategoriesVo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categorySlno;
+
     private Optional<List<Long>> categoriesId;
     private Long usersId;
-    private GeneralStatus status;
+    private String authKey;
+
 }
 

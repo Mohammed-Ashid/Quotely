@@ -21,3 +21,24 @@ databaseChangeLog:
               - column:
                   name: status
                   type: varchar(10)
+  - changeSet:
+      id: 2
+      author: Ashid
+      changes:
+        - addColumn:
+            tableName: favourites
+            columns:
+              - column:
+                  name: auth_key
+                  type: varchar(255)
+  - changeSet:
+      id: 3
+      author: Ashid
+      changes:
+        - addColumn:
+            tableName: favourites
+            columns:
+              - column:
+                  name: created_at
+                  type: datetime
+

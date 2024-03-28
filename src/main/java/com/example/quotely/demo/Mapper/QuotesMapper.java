@@ -1,6 +1,7 @@
 package com.example.quotely.demo.Mapper;
 
 import com.example.quotely.demo.Entity.Quotes;
+import com.example.quotely.demo.Enums.GeneralStatus;
 import com.example.quotely.demo.Vo.QuotesVo;
 
 import java.util.List;
@@ -23,8 +24,12 @@ public class QuotesMapper {
 
     public static Quotes toQuotes(QuotesVo quotesVo) {
         return Quotes.builder()
+                .quotesId(quotesVo.getQuotesId())
                 .category(quotesVo.getCategory())
                 .content(quotesVo.getContent())
+                .categoryId(quotesVo.getCategoryId())
+                .quotesAuthor(quotesVo.getQuotesAuthor())
+                .status(GeneralStatus.ACTIVE)
                 .build();
     }
 }

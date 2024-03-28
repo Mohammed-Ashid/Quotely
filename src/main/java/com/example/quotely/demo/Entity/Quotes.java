@@ -22,6 +22,7 @@ public class Quotes {
     private  String content;
     private  String quotesAuthor;
     private String category;
+    private Long categoryId;
     private Date createdAt;
     private Date updatedAt;
     private Long favouriteCount;

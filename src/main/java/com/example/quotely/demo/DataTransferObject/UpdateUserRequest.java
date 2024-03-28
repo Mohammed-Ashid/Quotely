@@ -15,4 +15,5 @@ public class UpdateUserRequest {
     private Long usersId;
     private String oldPassword;
     private String newPassword;
+    private String authkey;
 }

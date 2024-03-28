@@ -9,6 +9,7 @@ public class FavouritesMapper {
         return Favourites.builder()
                 .quotesId(favouritesVo.getQuotesId())
                 .usersId(favouritesVo.getUsersId())
+                .authKey(favouritesVo.getAuthKey())
                 .status(GeneralStatus.ACTIVE)
                 .build();
     }

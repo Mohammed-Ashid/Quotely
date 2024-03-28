@@ -5,6 +5,7 @@ import com.example.quotely.demo.Enums.PremiumStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Table(name="Users")
@@ -21,9 +22,8 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-//    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     private Long usersId;
-
     private String firstName;
     private String lastName;
     private String email;
@@ -33,7 +33,7 @@ public class Users {
     private String authKey;
     private Long themesId;
     private PremiumStatus premiumStatus;
-    private Date premiumStartDate;
-    private Date premiumEndDate;
+    private LocalDate premiumStartDate;
+    private LocalDate premiumEndDate;
     private GeneralStatus status;
 }

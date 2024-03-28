@@ -1,5 +1,6 @@
 package com.example.quotely.demo.Vo;
 import com.example.quotely.demo.Entity.StatusOfQuotesUsage;
+import com.example.quotely.demo.Enums.GeneralStatus;
 import com.example.quotely.demo.Repository.StatusOfQuotesUsageRepository;
 
 import com.example.quotely.demo.Responses.QuotesData;
@@ -46,7 +47,7 @@ public class RandomQuoteSelector {
     }
 
 
-    public Optional<List<QuotesData>> selectRandomQuotes(List<QuotesVo> quotes, Long numberOfQuotesToSelect, Long suserId)
+    public Optional<List<QuotesData>> selectRandomQuotes(List<QuotesVo> quotes, Long numberOfQuotesToSelect, Long suserId,String authKey)
     {
         if (quotes == null || quotes.isEmpty() || numberOfQuotesToSelect <= 0)
         {
@@ -100,6 +101,8 @@ public class RandomQuoteSelector {
                 StatusOfQuotesUsage statusOfQuotesUsage=StatusOfQuotesUsage.builder()
                         .quotesId(squotesId)
                         .usersId(suserId)
+                        .authKey(authKey)
+                        .status(GeneralStatus.ACTIVE)
                         .build();
                 statusOfQuoteUsageRepository.save(statusOfQuotesUsage);
 

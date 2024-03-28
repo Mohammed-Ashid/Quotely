@@ -1,5 +1,6 @@
 package com.example.quotely.demo.Controller;
 
+import com.example.quotely.demo.DataTransferObject.BuyPremiumRequest;
 import com.example.quotely.demo.DataTransferObject.UpdateUserRequest;
 import com.example.quotely.demo.DataTransferObject.UserLoginRequest;
 import com.example.quotely.demo.Responses.UserResponseData;
@@ -9,10 +10,7 @@ import com.example.quotely.demo.Vo.UsersVo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -30,7 +28,7 @@ public class UserController {
 
     @PostMapping("/updateuser")
     public ResponseEntity<UserResponseData> updateUser(@RequestBody UpdateUserRequest request){
-        UserResponseData result=userService.updateUser(request.getUsersId(),request.getOldPassword(),request.getNewPassword());
+        UserResponseData result=userService.updateUser(request.getUsersId(),request.getOldPassword(),request.getNewPassword(),request.getAuthkey());
         return  ResponseEntity.ok(result);
     }
 
@@ -47,8 +45,8 @@ public class UserController {
     }
 
     @PostMapping("/buypremium")
-    public ResponseEntity<UserResponseData> buyPremium(@RequestBody Long userId){
-        UserResponseData result=userService.buyPremium(userId);
+    public ResponseEntity<UserResponseData> buyPremium(@RequestBody BuyPremiumRequest buyPremiumRequest){
+        UserResponseData result=userService.buyPremium(buyPremiumRequest.getUserId(), buyPremiumRequest.getDuration(), buyPremiumRequest.getAuthKey());
         return ResponseEntity.ok(result);
     }
 

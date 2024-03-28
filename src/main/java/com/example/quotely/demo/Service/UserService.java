@@ -1,13 +1,12 @@
 package com.example.quotely.demo.Service;
 
-import com.example.quotely.demo.Responses.QuotesResponseData;
 import com.example.quotely.demo.Responses.UserResponseData;
 import com.example.quotely.demo.Vo.UsersVo;
 
 public interface UserService {
     public UserResponseData addUser(UsersVo userVo);
 
-   public UserResponseData updateUser(Long usersId, String oldPassword, String newPassword);
+   public UserResponseData updateUser(Long usersId, String oldPassword, String newPassword, String authkey);
 
     public  UserResponseData deleteUser(Long userId);
 
@@ -17,5 +16,5 @@ public interface UserService {
 
 
 
-    public UserResponseData buyPremium(Long userId);
+    public UserResponseData buyPremium(Long userId, Long duration, String authKey);
 }
