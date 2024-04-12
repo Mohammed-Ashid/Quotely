@@ -31,6 +31,7 @@ public class RandomQuoteSelector {
     private final UserCategoriesRepository userCategoriesRepository;
 
     Long userUsedCategorySize;
+    boolean userQuoteExists;
 
     @Autowired
     public RandomQuoteSelector(StatusOfQuotesUsageRepository statusOfQuoteUsageRepository, CategoriesRepository categoriesRepository, QuoteRepository quoteRepository, UserCategoriesRepository userCategoriesRepository) {
@@ -167,44 +168,47 @@ userUsedCategorySize=categorySize;
                 // Fetching quotesId from the randomQuote
                 Long squotesId = randomQuote.getQuotesId();
                 Long squotesCategoryId=randomQuote.getCategoryId();
-
+                StatusOfQuotesUsage statusOfQuotesUsage = new StatusOfQuotesUsage();
+                QuotesData data = new QuotesData();
 
 
 
                 boolean userCategoryExist=doesUserCategoryExist(squotesCategoryId,userSelectedCategory);
-                boolean userQuoteExists = doesUserQuoteExist(suserId, squotesId);
+                userQuoteExists = doesUserQuoteExist(suserId, squotesId);
                 if(selectedQuotes.size()==balanceQuotesSize) {
                     return Optional.ofNullable(selectedQuotes);
                 }
 
+                if(userUsedCategorySize<totalCategoryQuoteSize) {
+                    // If userId exists, skip this quote and continue to the next iteration
+                    if ((!userCategoryExist || userQuoteExists)) {
+                        i--;
+                        continue;
+                    }
+                    statusOfQuotesUsage = StatusOfQuotesUsage.builder()
+                            .quotesId(squotesId)
+                            .usersId(suserId)
+                            .authKey(authKey)
+                            .quotesCategoryId(squotesCategoryId)
+                            .status(GeneralStatus.ACTIVE)
+                            .build();
+                    statusOfQuoteUsageRepository.save(statusOfQuotesUsage);
 
-                // If userId exists, skip this quote and continue to the next iteration
-                if ((!userCategoryExist || userQuoteExists)&& userUsedCategorySize<=totalCategoryQuoteSize) {
-                    i--;
-                    continue;
+
+                    data.setId(randomQuote.getQuotesId());
+                    data.setCategory(randomQuote.getCategory());
+                    data.setCategoryId(squotesCategoryId);
+                    data.setDataList(List.of(randomQuote.getContent()));
+
+                    selectedQuotes.add(data);
+                    userUsedQuotesSizeFinder(suserId, userSelectedCategory);
                 }
-                StatusOfQuotesUsage statusOfQuotesUsage=StatusOfQuotesUsage.builder()
-                        .quotesId(squotesId)
-                        .usersId(suserId)
-                        .authKey(authKey)
-                        .quotesCategoryId(squotesCategoryId)
-                        .status(GeneralStatus.ACTIVE)
-                        .build();
-                statusOfQuoteUsageRepository.save(statusOfQuotesUsage);
-
-                QuotesData data = new QuotesData();
-                data.setId(randomQuote.getQuotesId());
-                data.setCategory(randomQuote.getCategory());
-                data.setCategoryId(squotesCategoryId);
-                data.setDataList(List.of(randomQuote.getContent()));
-
-                selectedQuotes.add(data);
-                userUsedQuotesSizeFinder(suserId,userSelectedCategory);
-                if(userUsedCategorySize>=totalCategoryQuoteSize){
+                // afteer all quotes from quotes category are selected ,rest quotes are selected using this.ie,quotes which dosenot belong to the user category
+                else {
 
 
                     // Check if the current userId exists in the list
-//                    boolean userQuoteExists = doesUserQuoteExist(suserId, squotesId);
+                    boolean userQuoteExists = doesUserQuoteExist(suserId, squotesId);
 
 
                     if(selectedQuotes.size()==balanceQuotesSize) {
@@ -216,10 +220,10 @@ userUsedCategorySize=categorySize;
 
 
                     // If userId exists, skip this quote and continue to the next iteration
-//                    if (userQuoteExists) {
-//                        i--;
-//                        continue;
-//                    }
+                    if (userQuoteExists) {
+                        i--;
+                        continue;
+                    }
 
 
 
