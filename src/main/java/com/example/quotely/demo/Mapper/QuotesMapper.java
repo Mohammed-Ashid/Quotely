@@ -19,6 +19,8 @@ public class QuotesMapper {
           .quotesId(quotes.getQuotesId())
           .category(quotes.getCategory())
           .content(quotes.getContent())
+          .quotesAuthor(quotes.getQuotesAuthor())
+          .categoryId(quotes.getCategoryId())
           .build();
     }
 

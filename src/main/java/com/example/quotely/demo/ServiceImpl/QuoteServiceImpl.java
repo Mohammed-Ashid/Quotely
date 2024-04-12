@@ -92,6 +92,7 @@ public class QuoteServiceImpl implements QuoteService {
         QuotesData dataResult = QuotesData.builder()
                 .id(quotes.getQuotesId())
                 .category(quotesVo.getCategory())
+                .categoryId(quotes.getCategoryId())
                 .dataList("New quote added")
                 .build();
 

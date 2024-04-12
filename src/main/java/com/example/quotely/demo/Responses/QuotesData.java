@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class QuotesData {
     private long id;
     private String category;
+    private Long categoryId;
     private Object dataList;
 
 

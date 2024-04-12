@@ -21,3 +21,13 @@ databaseChangeLog:
               - column:
                   name: status
                   type: varchar(10)
+  - changeSet:
+      id: 2
+      author: Ashid
+      changes:
+        - addColumn:
+            tableName: categories
+            columns:
+              - column:
+                  name: number_of_quotes
+                  type: bigint

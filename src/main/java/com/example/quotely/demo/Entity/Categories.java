@@ -18,6 +18,7 @@ public class Categories {
     private long categoriesId;
     private String categoriesName;
     private Date createdAt;
+    private Long numberOfQuotes;
     private GeneralStatus status;
 
 }

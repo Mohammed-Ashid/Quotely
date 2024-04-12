@@ -31,3 +31,13 @@ databaseChangeLog:
               - column:
                   name: auth_key
                   type: varchar(255)
+  - changeSet:
+      id: 3
+      author: Ashid
+      changes:
+        - addColumn:
+            tableName: status_of_quotes_usage
+            columns:
+              - column:
+                  name: quotes_category_id
+                  type: bigint
